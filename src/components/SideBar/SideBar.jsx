@@ -1,46 +1,37 @@
-import React from 'react'
-import {
-  Grid,
-  Box,
-  Typography,
-  FormControl,
-  Select,
-  MenuItem,
-} from '@material-ui/core/'
+import React, { useRef } from 'react'
+import { Box } from '@material-ui/core/'
 import CitySelector from '../CitySelector'
 import CategoryCheckbox from '../CategoryCheckbox'
+import PriceSlider from '../PriceSlider'
+import FilterButton from '../FilterButton'
 
-class SideBar extends React.Component {
-  constructor(props) {
-    super()
-    // this.state = {
-    //   data: props.data,
-    //   cities: props.cities,
-    //   categories: props.categories,
-    // }
+const SideBar = props => {
+  const { state, setFilter } = props
+  const formRef = useRef(null)
+  const onFilter = (values) => {
+    console.log('FILTER', values)
   }
-  render() {
-    console.log(this.props)
-    return (
-      <div style={{ maxWidth: 300 }}>
-        <Box>
-          <CitySelector
-            title='City'
-            data={this.props.state.cities}
-            setFilter={this.props.setFilter}
-          />
-          <CategoryCheckbox
-            title='Category'
-            data={this.props.categories}
-            setFilter={this.props.setFilter}
-            filter={this.props.state.filter.categories}
-          />
 
-          {/* <Typography variant='h5'>CATEGORIES</Typography> */}
-        </Box>
-      </div>
-    )
-  }
+  return (
+    <div style={{ maxWidth: 300 }}>
+      <Box>
+        <CitySelector title='City' data={state.cities} setFilter={setFilter} />
+        <CategoryCheckbox
+          title='Category'
+          data={state.categories}
+          setFilter={setFilter}
+          filter={state.filter.categories}
+        />
+        <PriceSlider
+          title='Price'
+          data={state.prices}
+          setFilter={setFilter}
+          filter={state.filter.price}
+        />
+        <FilterButton onClick={onFilter}/>
+      </Box>
+    </div>
+  )
 }
 
 export default SideBar
