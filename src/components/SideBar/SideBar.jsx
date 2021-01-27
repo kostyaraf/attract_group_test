@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Box } from '@material-ui/core/'
 import CitySelector from '../CitySelector'
 import CategoryCheckbox from '../CategoryCheckbox'
@@ -7,7 +7,6 @@ import FilterButton from '../FilterButton'
 
 const SideBar = props => {
   const { state, setFilter } = props
-  const formRef = useRef(null)
   const onFilter = (values) => {
     console.log('FILTER', values)
   }
