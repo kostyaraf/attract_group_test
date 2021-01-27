@@ -8,7 +8,7 @@ import {
   Checkbox,
 } from '@material-ui/core/'
 
-const Selector = props => {
+const CategoryCheckbox = props => {
   const { title, data, filter, setFilter } = props
   const handleChange = event => {
     const value = +event.target.value
@@ -43,4 +43,4 @@ const Selector = props => {
   )
 }
 
-export default Selector
+export default CategoryCheckbox

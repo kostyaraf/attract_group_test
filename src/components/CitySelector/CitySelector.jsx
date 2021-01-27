@@ -7,7 +7,7 @@ import {
   MenuItem,
 } from '@material-ui/core/'
 
-const Selector = props => {
+const CitySelector = props => {
   const { title, data, setFilter } = props
   const handleChange = event => {
     setFilter(state => state.filter.cities = [event.target.value])
@@ -29,4 +29,4 @@ const Selector = props => {
   )
 }
 
-export default Selector
+export default CitySelector
