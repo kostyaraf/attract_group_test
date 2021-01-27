@@ -6,13 +6,10 @@ import PriceSlider from '../PriceSlider'
 import FilterButton from '../FilterButton'
 
 const SideBar = props => {
-  const { state, setFilter } = props
-  const onFilter = (values) => {
-    console.log('FILTER', values)
-  }
+  const { state, setFilter, onFilterButtonClick } = props
 
   return (
-    <div style={{ maxWidth: 300 }}>
+    <div>
       <Box>
         <CitySelector title='City' data={state.cities} setFilter={setFilter} />
         <CategoryCheckbox
@@ -27,7 +24,7 @@ const SideBar = props => {
           setFilter={setFilter}
           filter={state.filter.price}
         />
-        <FilterButton onClick={onFilter}/>
+        <FilterButton onClick={onFilterButtonClick}/>
       </Box>
     </div>
   )

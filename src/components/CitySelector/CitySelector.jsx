@@ -10,14 +10,17 @@ import {
 const CitySelector = props => {
   const { title, data, setFilter } = props
   const handleChange = event => {
-    setFilter(state => state.filter.cities = [event.target.value])
+    setFilter(state => state.filter.city = event.target.value)
   }
 
   return (
     <Box>
       <Typography variant='h5'>{title}</Typography>
       <FormControl variant='outlined'>
-        <Select defaultValue={data[0].id} onChange={handleChange}>
+        <Select defaultValue={false} onChange={handleChange}>
+          <MenuItem value={false} name='All'>
+            All
+          </MenuItem>
           {data.map(city => (
             <MenuItem value={city.id} name={city.name} key={city.id}>
               {city.name}
