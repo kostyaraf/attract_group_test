@@ -1,10 +1,12 @@
 import React from 'react'
-import SideBar from '../../components/SideBar/'
-import { Container, Grid } from '@material-ui/core/'
-import data from '../../data/data'
-import cities from '../../data/cities'
-import categories from '../../data/categories'
+import SideBar from '../../bars/SideBar'
+import { Box, Container, Grid, Hidden } from '@material-ui/core/'
+import data from '../../../data/data'
+import cities from '../../../data/cities'
+import categories from '../../../data/categories'
 import FilterPageContent from './FilterPageContent'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import theme from '../../../services/theme'
 
 const sortPrices = data.sort((a, b) => a.price - b.price)
 const minPrice = sortPrices[0].price
@@ -36,13 +38,14 @@ class FilterPage extends React.Component {
 
   getFilteredData = (state = this.state) => {
     const { filter } = state
-    const categories = state.categories.map(cat => {
+    const categoriesWithCount = state.categories.map(cat => {
       cat.count = 0
       return cat
     })
     const newData = data.filter(obj => {
-      const catIndex = categories.findIndex(cat => cat.id === obj.category)
-
+      const catIndex = categoriesWithCount.findIndex(
+        cat => cat.id === obj.category
+      )
       const mainFiltration =
         (!filter.city || obj.city === filter.city) &&
         obj.price >= filter.price[0] &&
@@ -50,13 +53,11 @@ class FilterPage extends React.Component {
 
       const catFiltration =
         !filter.categories.length || filter.categories.includes(obj.category)
-      console.log('catFiltration ', catFiltration)
 
-      if (mainFiltration) categories[catIndex].count += 1
+      if (mainFiltration) categoriesWithCount[catIndex].count += 1
       return mainFiltration && catFiltration
     })
-
-    return { data: newData, categories, filter }
+    return { data: newData, categories: categoriesWithCount, filter }
   }
 
   activateFilter = () => {
@@ -67,26 +68,46 @@ class FilterPage extends React.Component {
     })
   }
 
+  // sideBarProps = {
+  //   state: this.state,
+  //   cities: this.state.c,
+  //   categories: this.state.categories,
+  //   setFilter: this.setFilter,
+  //   activateFilter: this.activateFilter,
+  // }
+
   render() {
     return (
-      <div>
+      <MuiThemeProvider theme={theme}>
         <Container>
+          <Hidden smUp>
+            <SideBar
+              state={this.state}
+              cities={this.state.cities}
+              categories={this.state.categories}
+              setFilter={this.setFilter}
+              activateFilter={this.activateFilter}
+              mobile
+            />
+          </Hidden>
           <Grid container>
-            <Grid item xs={3}>
-              <SideBar
-                state={this.state}
-                cities={this.state.cities}
-                categories={this.state.categories}
-                setFilter={this.setFilter}
-                activateFilter={this.activateFilter}
-              />
-            </Grid>
-            <Grid item xs={9}>
+            <Hidden xsDown>
+              <Grid item xs={1} sm={4} md={3}>
+                <SideBar
+                  state={this.state}
+                  cities={this.state.cities}
+                  categories={this.state.categories}
+                  setFilter={this.setFilter}
+                  activateFilter={this.activateFilter}
+                />
+              </Grid>
+            </Hidden>
+            <Grid item xs={12} sm={8} md={9}>
               <FilterPageContent state={this.state} />
             </Grid>
           </Grid>
         </Container>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }

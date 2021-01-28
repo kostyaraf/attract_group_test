@@ -1,5 +1,6 @@
-import FilterPage from './pages/FilterPage/FilterPage'
-import './App.css'
+import 'typeface-raleway'
+import 'typeface-montserrat'
+import FilterPage from './components/pages/FilterPage'
 
 function App() {
   return (

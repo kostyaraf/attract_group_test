@@ -8,6 +8,7 @@ const FilterButton = props => {
       size='small'
       color='primary'
       onClick={props.onClick}
+      style={{ width: '100%' }}
     >
       Filter
     </Button>
