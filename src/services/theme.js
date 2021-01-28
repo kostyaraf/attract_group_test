@@ -80,25 +80,13 @@ const theme = createMuiTheme({
         borderRadius: 0,
         height: 35,
       },
+      contained: {
+        boxShadow: 'unset',
+      },
       label: {
         color: colors.light,
       },
     },
-    //   body1: {
-    //     color: 'red !important',
-    //   },
-    //   body2: {
-    //     color: 'red !important',
-    //   },
-    //   h5: {
-    //     color: 'red !important',
-    //   },
-    //   Typography: {
-    //     color: 'red !important',
-    //   },
-    //   typography: {
-    //     color: 'red !important',
-    //   },
   },
 })
 
