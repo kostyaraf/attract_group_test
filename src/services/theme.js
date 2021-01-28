@@ -1,10 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
 const colors = {
+  accent: '#1cb8ff',
+  black: '#33363e',
   gray: '#d6d9e1',
   light: '#ffffff',
-  black: '#33363e',
-  accent: '#1cb8ff',
 }
 
 const theme = createMuiTheme({
@@ -20,19 +20,33 @@ const theme = createMuiTheme({
     },
     text: {
       default: colors.black,
+      light: colors.light,
       primary: colors.accent,
       secondary: colors.gray,
+    },
+    background: {
       light: colors.light,
     },
   },
   typography: {
     fontFamily: 'Raleway',
     fontSize: 14,
+    body2: {
+      fontFamily: 'Montserrat',
+      fontSize: '0.8rem',
+    },
     h5: {
       fontFamily: 'Montserrat',
-      fontWeight: 800,
       fontSize: '1.2rem',
+      fontWeight: 800,
+      marginBottom: 16,
       textTransform: 'uppercase',
+    },
+    h6: {
+      fontFamily: 'Montserrat',
+      fontSize: '1rem',
+      fontWeight: 600,
+      lineHeight: '1.4',
       marginBottom: 16,
     },
   },
@@ -70,9 +84,9 @@ const theme = createMuiTheme({
         backgroundColor: colors.light,
         border: '3px solid currentColor',
         height: 16,
-        width: 16,
-        marginTop: -6,
         marginLeft: -9,
+        marginTop: -6,
+        width: 16,
       },
     },
     MuiButton: {
@@ -85,6 +99,16 @@ const theme = createMuiTheme({
       },
       label: {
         color: colors.light,
+      },
+    },
+    Mui: {
+      focusVisible: {
+        backgroundColor: colors.light,
+      },
+    },
+    MuiCardActionArea: {
+      focusHighlight: {
+        backgroundColor: colors.light,
       },
     },
   },
