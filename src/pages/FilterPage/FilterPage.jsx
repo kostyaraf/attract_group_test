@@ -5,6 +5,8 @@ import data from '../../data/data'
 import cities from '../../data/cities'
 import categories from '../../data/categories'
 import FilterPageContent from './FilterPageContent'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import theme from '../../services/theme'
 
 const sortPrices = data.sort((a, b) => a.price - b.price)
 const minPrice = sortPrices[0].price
@@ -50,7 +52,6 @@ class FilterPage extends React.Component {
 
       const catFiltration =
         !filter.categories.length || filter.categories.includes(obj.category)
-      console.log('catFiltration ', catFiltration)
 
       if (mainFiltration) categories[catIndex].count += 1
       return mainFiltration && catFiltration
@@ -69,7 +70,7 @@ class FilterPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <MuiThemeProvider theme={theme}>
         <Container>
           <Grid container>
             <Grid item xs={3}>
@@ -86,7 +87,7 @@ class FilterPage extends React.Component {
             </Grid>
           </Grid>
         </Container>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
