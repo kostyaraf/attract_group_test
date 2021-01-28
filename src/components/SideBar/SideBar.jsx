@@ -3,35 +3,42 @@ import { Box } from '@material-ui/core/'
 import CitySelector from '../CitySelector'
 import CategoryCheckbox from '../CategoryCheckbox'
 import PriceSlider from '../PriceSlider'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(4, 1, 1),
+    maxWidth: 240,
+  },
+}))
 
 const SideBar = props => {
+  const classes = useStyles()
   const { state, setFilter, activateFilter } = props
   const { city, categories, price } = state.filter
   useEffect(activateFilter, [city, categories, price, activateFilter])
 
   return (
-    <div>
-      <Box>
-        <CitySelector
-          title='City'
-          data={state.cities}
-          setFilter={setFilter}
-          filter={state.filter.city}
-        />
-        <CategoryCheckbox
-          title='Category'
-          data={state.categories}
-          setFilter={setFilter}
-          filter={state.filter.categories}
-        />
-        <PriceSlider
-          title='Price'
-          data={state.prices}
-          setFilter={setFilter}
-          filter={state.filter.price}
-        />
-      </Box>
-    </div>
+    <Box className={classes.root}>
+      <CitySelector
+        title='City'
+        data={state.cities}
+        setFilter={setFilter}
+        filter={state.filter.city}
+      />
+      <CategoryCheckbox
+        title='Categories'
+        data={state.categories}
+        setFilter={setFilter}
+        filter={state.filter.categories}
+      />
+      <PriceSlider
+        title='Price'
+        data={state.prices}
+        setFilter={setFilter}
+        filter={state.filter.price}
+      />
+    </Box>
   )
 }
 

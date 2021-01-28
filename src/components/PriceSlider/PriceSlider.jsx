@@ -1,21 +1,35 @@
 import React, { useState } from 'react'
-import {
-  Box,
-  Typography,
-  Slider,
-  Grid,
-} from '@material-ui/core/'
+import { Box, Typography, Slider, Grid } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles'
 import FilterButton from '../FilterButton'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    width: 300,
+    width: '100%',
+  },
+  slider: {
+    width: `calc(100% - ${theme.spacing(1)}px)`
+  },
+  indicators: {
+    display: 'flex',
   },
   textValue: {
-    textAlign: 'left'
+    fontFamily: 'Montserrat',
+    fontWeight: 600,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  indicatorNumber: {
+    minWidth: 35,
+  },
+  indicatorMiddle: {
+    width: 30,
+    justifyContent: 'center',
+  },
+  bottomContainer: {
+    marginTop: theme.spacing(1),
   }
-})
+}))
 
 const PriceSlider = props => {
   const classes = useStyles()
@@ -32,31 +46,35 @@ const PriceSlider = props => {
 
   return (
     <Box className={classes.root}>
-      <Typography variant='h5'>{title}</Typography>
+      <Typography variant='h5' className={classes.title}>{title}</Typography>
       <Slider
         min={data[0]}
         max={data[1]}
         value={value}
         onChange={handleChange}
-        valueLabelDisplay='auto'
         aria-labelledby='price-slider'
+        className={classes.slider}
       />
-      <Grid container>
+      <Grid container className={classes.bottomContainer}> 
         <Grid item xs={7}>
-          <Grid container>
-            <Grid item xs={5} className={classes.textValue}>
+          <Box className={classes.indicators} style={{ height: '100%' }}>
+            <Typography
+              className={`${classes.textValue} ${classes.indicatorNumber}`}
+            >
               {`$${value[0]}`}
-            </Grid>
-            <Grid item xs={2}>
-              {' - '}
-            </Grid>
-            <Grid item xs={5} className={classes.textValue}>
+            </Typography>
+            <Typography
+              className={`${classes.textValue} ${classes.indicatorMiddle}`}
+            >{` - `}</Typography>
+            <Typography
+              className={`${classes.textValue} ${classes.indicatorNumber}`}
+            >
               {`$${value[1]}`}
-            </Grid>
-          </Grid>
+            </Typography>
+          </Box>
         </Grid>
         <Grid item xs={5}>
-        <FilterButton onClick={onButtonClick}/>
+          <FilterButton onClick={onButtonClick} />
         </Grid>
       </Grid>
     </Box>
