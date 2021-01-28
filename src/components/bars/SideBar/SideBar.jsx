@@ -45,7 +45,6 @@ const SideBar = props => {
     setOpenMenu(!openMenu)
   }
 
-  console.log('openMenu', openMenu)
 
   return (
     <>

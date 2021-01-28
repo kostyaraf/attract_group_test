@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import {
   Box,
   Typography,
@@ -25,10 +25,9 @@ const useStyles = makeStyles(theme => ({
 const CitySelector = props => {
   const classes = useStyles()
   const { title, data, setFilter, filter } = props
-  const [city, setCity] = useState(filter)
+  const defaultValue = useRef(filter)
   const handleChange = event => {
     const { value } = event.target
-    setCity(value)
     setFilter(state => (state.filter.city = value))
   }
 
@@ -39,12 +38,12 @@ const CitySelector = props => {
       </Typography>
       <FormControl variant='outlined' style={{ width: '100%', paddingTop: 8 }}>
         <Select
-          defaultValue={city}
+          defaultValue={defaultValue.current}
           onChange={handleChange}
           className={classes.root}
           color='primary'
         >
-          <MenuItem value={false} name='All' className={classes.item}>
+          <MenuItem value={'all'} name='All' className={classes.item}>
             All
           </MenuItem>
           {data.map(city => (

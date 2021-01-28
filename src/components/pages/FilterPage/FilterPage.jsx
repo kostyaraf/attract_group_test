@@ -1,6 +1,6 @@
 import React from 'react'
 import SideBar from '../../bars/SideBar'
-import { Box, Container, Grid, Hidden } from '@material-ui/core/'
+import { Container, Grid, Hidden } from '@material-ui/core/'
 import data from '../../../data/data'
 import cities from '../../../data/cities'
 import categories from '../../../data/categories'
@@ -47,7 +47,7 @@ class FilterPage extends React.Component {
         cat => cat.id === obj.category
       )
       const mainFiltration =
-        (!filter.city || obj.city === filter.city) &&
+        (filter.city === 'all' || obj.city === filter.city) &&
         obj.price >= filter.price[0] &&
         obj.price <= filter.price[1]
 
@@ -67,14 +67,6 @@ class FilterPage extends React.Component {
       return { ...state, ...newData }
     })
   }
-
-  // sideBarProps = {
-  //   state: this.state,
-  //   cities: this.state.c,
-  //   categories: this.state.categories,
-  //   setFilter: this.setFilter,
-  //   activateFilter: this.activateFilter,
-  // }
 
   render() {
     return (

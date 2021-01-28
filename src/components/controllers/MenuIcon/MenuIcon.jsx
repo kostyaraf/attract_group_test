@@ -10,9 +10,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const InfoCard = props => {
-  const { size = 40, color = '#000000' } = props
+  const { size = 40 } = props
   const classes = useStyles()
-  const lineStyle = { width: '100%', height: '5%', backgroundColor: color }
 
   return (
     <CardActionArea
