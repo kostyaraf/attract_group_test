@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   slider: {
-    width: `calc(100% - ${theme.spacing(1)}px)`
+    width: `calc(100% - ${theme.spacing(1)}px)`,
   },
   indicators: {
     display: 'flex',
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   bottomContainer: {
     marginTop: theme.spacing(1),
-  }
+  },
 }))
 
 const PriceSlider = props => {
@@ -46,7 +46,9 @@ const PriceSlider = props => {
 
   return (
     <Box className={classes.root}>
-      <Typography variant='h5' className={classes.title}>{title}</Typography>
+      <Typography variant='h5' className={classes.title}>
+        {title}
+      </Typography>
       <Slider
         min={data[0]}
         max={data[1]}
@@ -55,7 +57,7 @@ const PriceSlider = props => {
         aria-labelledby='price-slider'
         className={classes.slider}
       />
-      <Grid container className={classes.bottomContainer}> 
+      <Grid container className={classes.bottomContainer}>
         <Grid item xs={7}>
           <Box className={classes.indicators} style={{ height: '100%' }}>
             <Typography

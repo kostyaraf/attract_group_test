@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@material-ui/core/'
-import InfoCard from '../../components/InfoCard'
+import InfoCard from '../../controllers/InfoCard'
 
 const FilterPageContent = props => {
   const { state } = props

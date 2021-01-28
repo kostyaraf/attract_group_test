@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Box } from '@material-ui/core/'
-import CitySelector from '../CitySelector'
-import CategoryCheckbox from '../CategoryCheckbox'
-import PriceSlider from '../PriceSlider'
+import CitySelector from '../../controllers/CitySelector'
+import CategoryCheckbox from '../../controllers/CategoryCheckbox'
+import PriceSlider from '../../controllers/PriceSlider'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({

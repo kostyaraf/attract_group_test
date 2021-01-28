@@ -1,12 +1,12 @@
 import React from 'react'
-import SideBar from '../../components/SideBar/'
+import SideBar from '../../bars/SideBar'
 import { Container, Grid } from '@material-ui/core/'
-import data from '../../data/data'
-import cities from '../../data/cities'
-import categories from '../../data/categories'
+import data from '../../../data/data'
+import cities from '../../../data/cities'
+import categories from '../../../data/categories'
 import FilterPageContent from './FilterPageContent'
 import { MuiThemeProvider } from '@material-ui/core/styles'
-import theme from '../../services/theme'
+import theme from '../../../services/theme'
 
 const sortPrices = data.sort((a, b) => a.price - b.price)
 const minPrice = sortPrices[0].price
@@ -38,13 +38,14 @@ class FilterPage extends React.Component {
 
   getFilteredData = (state = this.state) => {
     const { filter } = state
-    const categories = state.categories.map(cat => {
+    const categoriesWithCount = state.categories.map(cat => {
       cat.count = 0
       return cat
     })
     const newData = data.filter(obj => {
-      const catIndex = categories.findIndex(cat => cat.id === obj.category)
-
+      const catIndex = categoriesWithCount.findIndex(
+        cat => cat.id === obj.category
+      )
       const mainFiltration =
         (!filter.city || obj.city === filter.city) &&
         obj.price >= filter.price[0] &&
@@ -53,11 +54,10 @@ class FilterPage extends React.Component {
       const catFiltration =
         !filter.categories.length || filter.categories.includes(obj.category)
 
-      if (mainFiltration) categories[catIndex].count += 1
+      if (mainFiltration) categoriesWithCount[catIndex].count += 1
       return mainFiltration && catFiltration
     })
-
-    return { data: newData, categories, filter }
+    return { data: newData, categories: categoriesWithCount, filter }
   }
 
   activateFilter = () => {
