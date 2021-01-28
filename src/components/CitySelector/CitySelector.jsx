@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Typography,
@@ -8,16 +8,19 @@ import {
 } from '@material-ui/core/'
 
 const CitySelector = props => {
-  const { title, data, setFilter } = props
+  const { title, data, setFilter, filter } = props
+  const [city, setCity] = useState(filter)
   const handleChange = event => {
-    setFilter(state => state.filter.city = event.target.value)
+    const { value } = event.target
+    setCity(value)
+    setFilter(state => (state.filter.city = value))
   }
 
   return (
     <Box>
       <Typography variant='h5'>{title}</Typography>
       <FormControl variant='outlined'>
-        <Select defaultValue={false} onChange={handleChange}>
+        <Select defaultValue={city} onChange={handleChange}>
           <MenuItem value={false} name='All'>
             All
           </MenuItem>

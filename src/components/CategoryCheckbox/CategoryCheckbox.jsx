@@ -10,14 +10,18 @@ import {
 
 const CategoryCheckbox = props => {
   const { title, data, filter, setFilter } = props
+  
   const handleChange = event => {
     const value = +event.target.value
     setFilter(state => {
-      const { categories } = state.filter
+      let { categories } = state.filter
       const index = categories.indexOf(value)
-      return index === -1 ? categories.push(value) : categories.splice(index, 1)
+      index === -1 ? categories.push(value) : categories.splice(index, 1)
+      state.filter.categories = [...categories]
+      return state
     })
   }
+
   return (
     <Box>
       <Typography variant='h5'>{title}</Typography>
@@ -27,14 +31,20 @@ const CategoryCheckbox = props => {
             <FormControlLabel
               key={cat.id}
               control={
+                <>
                 <Checkbox
                   checked={filter.includes(cat.id)}
                   onChange={handleChange}
                   name={cat.name}
                   value={cat.id}
+                  disabled={!cat.count && !filter.includes(cat.id)}
                 />
+                <Typography>{cat.name}</Typography>
+                {!!cat.count && (
+                <Typography>{`(${cat.count})`}</Typography>
+                )}
+                </>
               }
-              label={cat.name}
             />
           ))}
         </FormGroup>

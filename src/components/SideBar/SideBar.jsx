@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box } from '@material-ui/core/'
 import CitySelector from '../CitySelector'
 import CategoryCheckbox from '../CategoryCheckbox'
 import PriceSlider from '../PriceSlider'
-import FilterButton from '../FilterButton'
 
 const SideBar = props => {
-  const { state, setFilter, onFilterButtonClick } = props
+  const { state, setFilter, activateFilter } = props
+  const { city, categories, price } = state.filter
+  useEffect(activateFilter, [city, categories, price, activateFilter])
 
   return (
     <div>
       <Box>
-        <CitySelector title='City' data={state.cities} setFilter={setFilter} />
+        <CitySelector
+          title='City'
+          data={state.cities}
+          setFilter={setFilter}
+          filter={state.filter.city}
+        />
         <CategoryCheckbox
           title='Category'
           data={state.categories}
@@ -24,7 +30,6 @@ const SideBar = props => {
           setFilter={setFilter}
           filter={state.filter.price}
         />
-        <FilterButton onClick={onFilterButtonClick}/>
       </Box>
     </div>
   )

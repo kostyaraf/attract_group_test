@@ -10,7 +10,6 @@ const sortPrices = data.sort((a, b) => a.price - b.price)
 const minPrice = sortPrices[0].price
 const maxPrice = sortPrices[sortPrices.length - 1].price
 const filterSave = sessionStorage.getItem('filter_save')
-
 const initialFilter = filterSave
   ? JSON.parse(filterSave)
   : {
@@ -18,7 +17,6 @@ const initialFilter = filterSave
       city: false,
       categories: [],
     }
-
 const initialState = {
   data,
   cities,
@@ -30,34 +28,46 @@ const initialState = {
 class FilterPage extends React.Component {
   constructor(props) {
     super()
-    initialState.data = this.getFilteredData(initialState)
     this.state = initialState
+    this.state = { ...initialState, ...this.getFilteredData(initialState) }
   }
 
   setFilter = this.setState.bind(this)
 
   getFilteredData = (state = this.state) => {
     const { filter } = state
-    return data.filter(
-      obj =>
+    const categories = state.categories.map(cat => {
+      cat.count = 0
+      return cat
+    })
+    const newData = data.filter(obj => {
+      const catIndex = categories.findIndex(cat => cat.id === obj.category)
+
+      const mainFiltration =
         (!filter.city || obj.city === filter.city) &&
         obj.price >= filter.price[0] &&
-        obj.price <= filter.price[1] &&
-        (!filter.categories.length || filter.categories.includes(obj.category))
-    )
+        obj.price <= filter.price[1]
+
+      const catFiltration =
+        !filter.categories.length || filter.categories.includes(obj.category)
+      console.log('catFiltration ', catFiltration)
+
+      if (mainFiltration) categories[catIndex].count += 1
+      return mainFiltration && catFiltration
+    })
+
+    return { data: newData, categories, filter }
   }
 
-  onFilterButtonClick = () => {
+  activateFilter = () => {
     const newData = this.getFilteredData()
     this.setState(state => {
-      state.data = newData
-      return state
+      sessionStorage.setItem('filter_save', JSON.stringify(newData.filter))
+      return { ...state, ...newData }
     })
-    sessionStorage.setItem('filter_save', JSON.stringify(this.state.filter))
   }
 
   render() {
-    console.log('Filter: ', this.state.filter)
     return (
       <div>
         <Container>
@@ -68,7 +78,7 @@ class FilterPage extends React.Component {
                 cities={this.state.cities}
                 categories={this.state.categories}
                 setFilter={this.setFilter}
-                onFilterButtonClick={this.onFilterButtonClick}
+                activateFilter={this.activateFilter}
               />
             </Grid>
             <Grid item xs={9}>
