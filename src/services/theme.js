@@ -33,8 +33,13 @@ const theme = createMuiTheme({
       fontWeight: 800,
       fontSize: '1.2rem',
       textTransform: 'uppercase',
-      marginBottom: 24,
-    }
+      marginBottom: 16,
+    },
+  },
+  slider: {
+    thumb: {
+      color: 'red',
+    },
   },
   select: {
     color: 'red',
@@ -50,26 +55,51 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    select: {
-      color: 'red',
-      fontWeight: 800,
+    MuiSlider: {
+      root: {
+        height: 4,
+      },
+      track: {
+        height: 4,
+      },
+      rail: {
+        height: 4,
+        color: colors.gray,
+      },
+      thumb: {
+        backgroundColor: colors.light,
+        border: '3px solid currentColor',
+        height: 16,
+        width: 16,
+        marginTop: -6,
+        marginLeft: -9,
+      },
     },
-  //   body1: {
-  //     color: 'red !important',
-  //   },
-  //   body2: {
-  //     color: 'red !important',
-  //   },
-  //   h5: {
-  //     color: 'red !important',
-  //   },
-  //   Typography: {
-  //     color: 'red !important',
-  //   }, 
-  //   typography: {
-  //     color: 'red !important',
-  //   }, 
-  }
+    MuiButton: {
+      root: {
+        borderRadius: 0,
+        height: 35,
+      },
+      label: {
+        color: colors.light,
+      },
+    },
+    //   body1: {
+    //     color: 'red !important',
+    //   },
+    //   body2: {
+    //     color: 'red !important',
+    //   },
+    //   h5: {
+    //     color: 'red !important',
+    //   },
+    //   Typography: {
+    //     color: 'red !important',
+    //   },
+    //   typography: {
+    //     color: 'red !important',
+    //   },
+  },
 })
 
 export default theme
