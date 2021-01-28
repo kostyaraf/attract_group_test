@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button } from '@material-ui/core/'
+import { Box } from '@material-ui/core/'
 import CitySelector from '../../controllers/CitySelector'
 import CategoryCheckbox from '../../controllers/CategoryCheckbox'
 import PriceSlider from '../../controllers/PriceSlider'
