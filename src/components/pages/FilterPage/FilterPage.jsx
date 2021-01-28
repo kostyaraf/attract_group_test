@@ -1,6 +1,6 @@
 import React from 'react'
 import SideBar from '../../bars/SideBar'
-import { Container, Grid } from '@material-ui/core/'
+import { Box, Container, Grid, Hidden } from '@material-ui/core/'
 import data from '../../../data/data'
 import cities from '../../../data/cities'
 import categories from '../../../data/categories'
@@ -68,21 +68,41 @@ class FilterPage extends React.Component {
     })
   }
 
+  // sideBarProps = {
+  //   state: this.state,
+  //   cities: this.state.c,
+  //   categories: this.state.categories,
+  //   setFilter: this.setFilter,
+  //   activateFilter: this.activateFilter,
+  // }
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <Container>
+          <Hidden smUp>
+            <SideBar
+              state={this.state}
+              cities={this.state.cities}
+              categories={this.state.categories}
+              setFilter={this.setFilter}
+              activateFilter={this.activateFilter}
+              mobile
+            />
+          </Hidden>
           <Grid container>
-            <Grid item xs={3}>
-              <SideBar
-                state={this.state}
-                cities={this.state.cities}
-                categories={this.state.categories}
-                setFilter={this.setFilter}
-                activateFilter={this.activateFilter}
-              />
-            </Grid>
-            <Grid item xs={9}>
+            <Hidden xsDown>
+              <Grid item xs={1} sm={4} md={3}>
+                <SideBar
+                  state={this.state}
+                  cities={this.state.cities}
+                  categories={this.state.categories}
+                  setFilter={this.setFilter}
+                  activateFilter={this.activateFilter}
+                />
+              </Grid>
+            </Hidden>
+            <Grid item xs={12} sm={8} md={9}>
               <FilterPageContent state={this.state} />
             </Grid>
           </Grid>

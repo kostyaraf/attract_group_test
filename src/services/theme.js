@@ -62,7 +62,7 @@ const theme = createMuiTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
+      sm: 640,
       md: 960,
       lg: 1226,
       xl: 1920,
@@ -99,11 +99,6 @@ const theme = createMuiTheme({
       },
       label: {
         color: colors.light,
-      },
-    },
-    Mui: {
-      focusVisible: {
-        backgroundColor: colors.light,
       },
     },
     MuiCardActionArea: {

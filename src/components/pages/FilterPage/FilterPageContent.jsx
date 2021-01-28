@@ -17,7 +17,7 @@ const FilterPageContent = props => {
   return (
     <Grid container spacing={4} className={classes.root}>
       {state.data.map(card => (
-        <Grid item xs={12} sm={6} lg={4} key={card.id}>
+        <Grid item xs={12} md={6} lg={4} key={card.id}>
           <InfoCard data={card} getParamName={getParamName} />
         </Grid>
       ))}
