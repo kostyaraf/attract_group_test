@@ -6,6 +6,7 @@ import {
   Grid,
 } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles'
+import FilterButton from '../FilterButton'
 
 const useStyles = makeStyles({
   root: {
@@ -25,8 +26,8 @@ const PriceSlider = props => {
     setValue(newValue)
   }
 
-  const onChangeCommitted = (event, newValue) => {
-    setFilter(state => (state.filter.price = newValue))
+  const onButtonClick = () => {
+    setFilter(state => (state.filter.price = value))
   }
 
   return (
@@ -37,7 +38,6 @@ const PriceSlider = props => {
         max={data[1]}
         value={value}
         onChange={handleChange}
-        onChangeCommitted={onChangeCommitted}
         valueLabelDisplay='auto'
         aria-labelledby='price-slider'
       />
@@ -55,7 +55,9 @@ const PriceSlider = props => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item xs={5}>
+        <FilterButton onClick={onButtonClick}/>
+        </Grid>
       </Grid>
     </Box>
   )

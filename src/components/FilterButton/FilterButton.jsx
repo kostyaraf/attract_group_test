@@ -7,7 +7,7 @@ const FilterButton = props => {
       variant='contained'
       size='small'
       color='primary'
-      onClick={props.onFilter}
+      onClick={props.onClick}
     >
       Filter
     </Button>
