@@ -16,7 +16,7 @@ const initialFilter = filterSave
   ? JSON.parse(filterSave)
   : {
       price: [0, maxPrice],
-      city: false,
+      city: 'all',
       categories: [],
     }
 const initialState = {
